@@ -17,6 +17,7 @@ import controler.EventManager;
 
 public class MainWindow extends JFrame {
 	
+	// Esto da algun formato a los decimales pero ni idea de como funciona xD
 	private DecimalFormat df = new DecimalFormat ("#,###.00");
 	
 	// Simbolos para los botones
@@ -28,33 +29,35 @@ public class MainWindow extends JFrame {
 			"0",".","=",
 	};
 	
+	// Variables
 	public int operator = 0;
+	public double firstNum = 0, secondNum = 0;
 	
+	// Paneles
 	private JPanel panel = new JPanel(new BorderLayout(5,5));
 	private JPanel btnPanel = new JPanel(new GridLayout(5,3,2,2));
 	private JButton[] btns = new JButton[19];
 	public JTextArea screen = new JTextArea(5,40);
 	
-	public double firstNum = 0, secondNum = 0;
-	
+	// Esto no me acuerdo para que era xDD
 	private JTextField calculatingTf = new JTextField(40);
 	
 	
-	
+	// Constructor
 	public MainWindow() {
 		
-		
+		// asigna las propiedades a los paneles
 		panel.setBackground(Color.BLACK);
 		btnPanel.setBackground(Color.BLACK);
 		screen.setBackground(Color.BLACK);
 		screen.setForeground(Color.WHITE);
 		screen.setFont(new Font("Times New Roman", Font.BOLD, 18));
 		
-		// Bucle que crea un boton por cada simbolo
+		// Bucle que crea un boton por cada simbolo del array
 		for (int i = 0; i < btns.length ; i++) {
 			// Crea un boton
 			btns[i] = new JButton(symbols[i]);
-			
+			// Opacidad
 			btns[i].setOpaque(false);
 			// Sin borde
 			btns[i].setBorderPainted(false);
@@ -69,10 +72,10 @@ public class MainWindow extends JFrame {
 		
 		}
 		
+		// Asigna la gerarquia de los elementos
 		panel.add(calculatingTf, BorderLayout.SOUTH);
 		panel.add(btnPanel, BorderLayout.CENTER);
 		panel.add(screen, BorderLayout.NORTH);
-		
 		add(panel);
 		// Tamaño de la ventana
 		setSize(300,500);
