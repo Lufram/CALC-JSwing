@@ -11,80 +11,120 @@ public class EventManager implements ActionListener{
 	
 	public EventManager(MainWindow window) {
 		
+	private String firstNum = null;
+	private String secondNum = null;
+	private int operator = 0;
 		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		/*String cmd = e.getActionCommand().toString();
+		String cmd = e.getActionCommand().toString();
 
 		switch (cmd) {
 			
 			case ".":
-				if (!window.getText().contains(".")){
+				if (!screen.getText().contains(".")){
 
-					window.getText(window.getText() + ".");
+					screen.getText(screen.getText() + ".");
 				}
 				break;
 
 			case "0":
-				window.getText(window.getText() + "0");
+				screen.getText(screen.getText() + "0");
 				break;
 
 			case "1":
-				window.getText(window.getText() + "1");
+				screen.getText(screen.getText() + "1");
 				break;
 
 			case "2":
-				window.getText(window.getText() + "2");
+				screen.getText(screen.getText() + "2");
 				break;
 
 			case "3":
-				window.getText(window.getText() + "3");
+				screen.getText(screen.getText() + "3");
 				break;
 
 			case "4":
-				window.getText(window.getText() + "4");
+				screen.getText(screen.getText() + "4");
 				break;
 
 			case "5":
-				window.getText(window.getText() + "5");
+				screen.getText(screen.getText() + "5");
 				break;
 
 			case "6":
-				window.getText(window.getText() + "6");
+				screen.getText(screen.getText() + "6");
 				break;
 
 			case "7":
-				window.getText(window.getText() + "7");
+				screen.getText(screen.getText() + "7");
 				break;
 
-			case "8":
-				window.getText(window.getText() + "8");
+			case "8": screen.getText(screen.getText() + "8");
 				break;
 
-			case "9":
-				window.getText(window.getText() + "9");
+			case "9": screen.getText(screen.getText() + "9");
 				break;
 
-			case "4":
-				window.getText(window.getText() + "0");
-				break;
+				
 
-			case "+":
-				if (!window.getText().isEmpty()){
+				
+
+			case "÷":
+				if (!screen.getText().isEmpty()){
 					
-					firstNum = Doble.parseDouble(window.getText().toString());
-					operator = 1;
-					window.setText("");
+					if (firstNum == null){
+						firstNum = Doble.parseDouble(screen.getText().toString());
+						operator = 1;
+
+					screen.getText(screen.getText() + " ÷ ");
+
+					}else if(secondNum != null){
+						// Resuelve la operacion y el resultado lo almacena en la variable
+						firstNum = Doble.parseDouble(calc().toString());
+						// Asigna suma al operador
+						operator = 1;
+						// Muestra el resultado 
+						screen.setText(firstNum + " ÷ ");
+					}
+				}
+				break;
+
+			case "X":
+				if (!screen.getText().isEmpty()){
+					
+					firstNum = Doble.parseDouble(screen.getText().toString());
+					operator = 2;
+					screen.setText("");
+
+				}
+				break;
+			case "-":
+				if (!screen.getText().isEmpty()){
+					
+					firstNum = Doble.parseDouble(screen.getText().toString());
+					operator = 3;
+					screen.setText("");
 
 				}
 				break;
 
+			case "+":
+				if (!screen.getText().isEmpty()){
+					
+					firstNum = Doble.parseDouble(screen.getText().toString());
+					operator = 4;
+					screen.setText("");
+
+				}
+				break;
+			
 			case "%":
-				double num = Double.parseDouble(window.getText().toString());
-				window.setText(String.valueOf(num/100.0));
+				double num = Double.parseDouble(screen.getText().toString());
+				screen.setText(String.valueOf(num/100.0));
 				break;
 
 			case "+/-":
@@ -93,17 +133,31 @@ public class EventManager implements ActionListener{
 				break;
 
 			case "AC":
-				window.setText("");
+				screen.setText("");
+				firstNum = null;
+				secondNum = null;
+				operator = 0;
 				break;
 				
 		
+			case "=":
+				calc(Double firstNum, Double secondNum, int operator);
+				break;
 
-
-				*/
+				
 
 
 		}
 		
-	
+	public string calc(){
+			witch(operator){
+					case "1": screen.setText(Float.toString(firstNum / secondNum));
+					case "2": screen.setText(Float.toString(firstNum * secondNum));
+					case "3": screen.setText(Float.toString(firstNum - secondNum));
+					case "4": screen.setText(Float.toString(firstNum + secondNum));
+
+				}
+
+	}
 
 }
