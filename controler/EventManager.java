@@ -7,8 +7,9 @@ import view.MainWindow;
 
 public class EventManager implements ActionListener{
 	
+	// Aqui almacenaremos la direccion en memoria de la ventana
 	private MainWindow window;
-	
+	// Constructor
 	public EventManager(MainWindow window) {
 		super();
 		this.window = window;	
@@ -17,8 +18,9 @@ public class EventManager implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		// Almacena en un string el boton pulsado
 		String cmd = e.getActionCommand().toString();
-
+		// En funcion del valor del boton pulsado
 		switch (cmd) {
 			
 			case ".":
@@ -70,12 +72,13 @@ public class EventManager implements ActionListener{
 				break;
 			
 			case "%":
+				// Falta por revisar
 				double num = Double.parseDouble(window.screen.getText().toString());
 				
 
 			case "+/-":
 				break;
-
+			// Reinicia los valores de las variables	
 			case "AC":
 				window.screen.setText("");
 				window.firstNum = 0;
@@ -83,7 +86,7 @@ public class EventManager implements ActionListener{
 				window.operator = 0;
 				break;
 				
-		
+			// Calcula el resultado 
 			case "=":
 				calc();
 				break;
@@ -128,32 +131,36 @@ public class EventManager implements ActionListener{
 		window.screen.setText(window.screen.getText() + symbol);
 	}
 	
-	
+	// Añade un operador si ya hay un operador calcula el resultado y añade el operador despues
 	public void addOperator(String symbol) {
-		
+		// Si el texto no esta vacio 
 		if (!window.screen.getText().isEmpty()){
-			
+			// Si no se ha guardado el primer numero
 			if (window.firstNum == 0){
+				// Entonces almacena el valor del texto que hay en pantalla en la variable 1
 				window.firstNum = Double.parseDouble(window.screen.getText().toString());
+				// Vacia la pantalla
 				window.screen.setText("");
 			}else {
+				// Si ya hay un numero en la variable entonces la almacena el la segunda
 				window.secondNum = Double.parseDouble(window.screen.getText().toString());
+				// calcula el resultado y el metodo almacenara el resultado en la variable firstNum
 				calc();
+				// Muestra en la pantalla el resultado
 				window.screen.setText(Double.toString(window.firstNum));
 			}
-			
+			// Una vez realizada la operacion asigna el valor del operador para la siguiente operacion
 			switch(symbol) {
-			case "÷": window.operator = 1;
-				break;
-			case "X": window.operator = 2;
-				break;
-			case "-": window.operator = 3;
-				break;
-			case "+": window.operator = 4;
-				break;
+				case "÷": window.operator = 1;
+					break;
+				case "X": window.operator = 2;
+					break;
+				case "-": window.operator = 3;
+					break;
+				case "+": window.operator = 4;
+					break;
 			}
-			
-			
+		
 		}
 	}
 }
