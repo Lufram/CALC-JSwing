@@ -21,21 +21,21 @@ public class MainWindow extends JFrame {
 	
 	// Simbolos para los botones
 	private String[] symbols = {
-			"AC", "+/-", "%", "÷",
+			"AC", "+/-", "%", "Ã·",
 			"7","8","9","X",
 			"4","5","6","-",
 			"1","2","3","+",
 			"0",".","=",
 	};
 	
-	private int operator = 0;
+	public int operator = 0;
 	
 	private JPanel panel = new JPanel(new BorderLayout(5,5));
 	private JPanel btnPanel = new JPanel(new GridLayout(5,3,2,2));
 	private JButton[] btns = new JButton[19];
-	private JTextArea screen = new JTextArea(5,40);
+	public JTextArea screen = new JTextArea(5,40);
 	
-	private double firstNum = 0, secondNum = 0;
+	public double firstNum = 0, secondNum = 0;
 	
 	private JTextField calculatingTf = new JTextField(40);
 	
@@ -62,9 +62,9 @@ public class MainWindow extends JFrame {
 			btns[i].setBackground(Color.BLACK);
 			// Contenido en blanco
 			btns[i].setForeground(Color.WHITE);
-			// Añade un listener al boton
+			// AÃ±ade un listener al boton
 			btns[i].addActionListener(new EventManager(this));
-			// Añade el boton al panel
+			// AÃ±ade el boton al panel
 			btnPanel.add(btns[i]);
 		
 		}
@@ -74,7 +74,7 @@ public class MainWindow extends JFrame {
 		panel.add(screen, BorderLayout.NORTH);
 		
 		add(panel);
-		// Tamaño de la ventana
+		// TamaÃ±o de la ventana
 		setSize(300,500);
 		// Localizaon de la ventana
 		setLocationRelativeTo(null);
