@@ -10,11 +10,8 @@ public class EventManager implements ActionListener{
 	private MainWindow window;
 	
 	public EventManager(MainWindow window) {
-		
-	private String firstNum = null;
-	private String secondNum = null;
-	private int operator = 0;
-		
+		super();
+		this.window = window;	
 	}
 
 	@Override
@@ -25,139 +22,138 @@ public class EventManager implements ActionListener{
 		switch (cmd) {
 			
 			case ".":
-				if (!screen.getText().contains(".")){
-
-					screen.getText(screen.getText() + ".");
+				if (!window.screen.getText().contains(".")){
+					addSymbol(".");
 				}
 				break;
 
-			case "0":
-				screen.getText(screen.getText() + "0");
+			case "0": addSymbol("0");
 				break;
 
-			case "1":
-				screen.getText(screen.getText() + "1");
+			case "1": addSymbol("1");
 				break;
 
-			case "2":
-				screen.getText(screen.getText() + "2");
+			case "2": addSymbol("2");
 				break;
 
-			case "3":
-				screen.getText(screen.getText() + "3");
+			case "3": addSymbol("3");
 				break;
 
-			case "4":
-				screen.getText(screen.getText() + "4");
+			case "4": addSymbol("4");
 				break;
 
-			case "5":
-				screen.getText(screen.getText() + "5");
+			case "5": addSymbol("5");
 				break;
 
-			case "6":
-				screen.getText(screen.getText() + "6");
+			case "6": addSymbol("6");
 				break;
 
-			case "7":
-				screen.getText(screen.getText() + "7");
+			case "7": addSymbol("7");
 				break;
 
-			case "8": screen.getText(screen.getText() + "8");
+			case "8": addSymbol("8");
 				break;
 
-			case "9": screen.getText(screen.getText() + "9");
+			case "9": addSymbol("9");
 				break;
 
+			case "÷":addOperator("÷");
+				break;
+
+			case "X":addOperator("X");
+				break;
 				
-
-				
-
-			case "÷":
-				if (!screen.getText().isEmpty()){
-					
-					if (firstNum == null){
-						firstNum = Doble.parseDouble(screen.getText().toString());
-						operator = 1;
-
-					screen.getText(screen.getText() + " ÷ ");
-
-					}else if(secondNum != null){
-						// Resuelve la operacion y el resultado lo almacena en la variable
-						firstNum = Doble.parseDouble(calc().toString());
-						// Asigna suma al operador
-						operator = 1;
-						// Muestra el resultado 
-						screen.setText(firstNum + " ÷ ");
-					}
-				}
+			case "-":addOperator("-");
 				break;
 
-			case "X":
-				if (!screen.getText().isEmpty()){
-					
-					firstNum = Doble.parseDouble(screen.getText().toString());
-					operator = 2;
-					screen.setText("");
-
-				}
-				break;
-			case "-":
-				if (!screen.getText().isEmpty()){
-					
-					firstNum = Doble.parseDouble(screen.getText().toString());
-					operator = 3;
-					screen.setText("");
-
-				}
-				break;
-
-			case "+":
-				if (!screen.getText().isEmpty()){
-					
-					firstNum = Doble.parseDouble(screen.getText().toString());
-					operator = 4;
-					screen.setText("");
-
-				}
+			case "+":addOperator("+");
 				break;
 			
 			case "%":
-				double num = Double.parseDouble(screen.getText().toString());
-				screen.setText(String.valueOf(num/100.0));
-				break;
+				double num = Double.parseDouble(window.screen.getText().toString());
+				
 
 			case "+/-":
-
-				
 				break;
 
 			case "AC":
-				screen.setText("");
-				firstNum = null;
-				secondNum = null;
-				operator = 0;
+				window.screen.setText("");
+				window.firstNum = 0;
+				window.secondNum = 0;
+				window.operator = 0;
 				break;
 				
 		
 			case "=":
-				calc(Double firstNum, Double secondNum, int operator);
+				calc();
 				break;
-
-				
-
-
+	
 		}
-		
-	public string calc(){
-			witch(operator){
-					case "1": screen.setText(Float.toString(firstNum / secondNum));
-					case "2": screen.setText(Float.toString(firstNum * secondNum));
-					case "3": screen.setText(Float.toString(firstNum - secondNum));
-					case "4": screen.setText(Float.toString(firstNum + secondNum));
-
-				}
 
 	}
-
+	
+	// Realiza la operacion matematica
+	public void calc(){
+		// Si el texto no esta vacio
+		if (!window.screen.getText().isEmpty()){
+			// Guarda en la variable secondNum el segundo numero para operar
+			window.secondNum = Double.parseDouble(window.screen.getText().toString());
+			// Realiza el calculo en funcion del operador que hemos introducido
+			switch(Integer.toString(window.operator)){
+				// Division
+				case "1": window.firstNum = window.firstNum / window.secondNum;
+					break;
+				// Multiplicacion
+				case "2": window.firstNum = window.firstNum * window.secondNum;
+				// Resta
+					break;
+				case "3": window.firstNum = window.firstNum - window.secondNum;
+				// Suma
+					break;
+				case "4": window.firstNum = window.firstNum + window.secondNum;
+					break;
+			}
+			// Reiniciamos las variables
+			window.secondNum = 0;
+			window.operator = 0;
+			// Mostramos el resultado y lo mantenemos como primer valor de la siguiente operacion
+			window.screen.setText(Double.toString(window.firstNum));
+		
+		}
+	}
+	
+	// Añade numeros al texto
+	public void addSymbol(String symbol) {
+		// Añadimos el numero 
+		window.screen.setText(window.screen.getText() + symbol);
+	}
+	
+	
+	public void addOperator(String symbol) {
+		
+		if (!window.screen.getText().isEmpty()){
+			
+			if (window.firstNum == 0){
+				window.firstNum = Double.parseDouble(window.screen.getText().toString());
+				window.screen.setText("");
+			}else {
+				window.secondNum = Double.parseDouble(window.screen.getText().toString());
+				calc();
+				window.screen.setText(Double.toString(window.firstNum));
+			}
+			
+			switch(symbol) {
+			case "÷": window.operator = 1;
+				break;
+			case "X": window.operator = 2;
+				break;
+			case "-": window.operator = 3;
+				break;
+			case "+": window.operator = 4;
+				break;
+			}
+			
+			
+		}
+	}
 }
