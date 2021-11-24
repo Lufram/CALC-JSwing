@@ -48,9 +48,9 @@ public class MainWindow extends JFrame {
 	public MainWindow() {
 		
 		// asigna las propiedades a los paneles
-		panel.setBackground(Color.BLACK);
-		btnPanel.setBackground(Color.BLACK);
-		screen.setBackground(Color.BLACK);
+		panel.setBackground(Color.decode("#353535"));
+		btnPanel.setBackground(Color.decode("#353535"));
+		screen.setBackground(Color.decode("#353535"));
 		screen.setForeground(Color.WHITE);
 		screen.setFont(new Font("Roboto", Font.BOLD, 25));
 		
