@@ -62,7 +62,7 @@ public class EventManager implements ActionListener{
 			case "÷":addOperator("÷");
 				break;
 
-			case "X":addOperator("X");
+			case "x":addOperator("x");
 				break;
 				
 			case "-":addOperator("-");
@@ -75,7 +75,6 @@ public class EventManager implements ActionListener{
 				// Falta por revisar
 				double num = Double.parseDouble(window.screen.getText().toString());
 				
-
 			case "+/-":
 				break;
 			// Reinicia los valores de las variables	
@@ -146,14 +145,12 @@ public class EventManager implements ActionListener{
 				window.secondNum = Double.parseDouble(window.screen.getText().toString());
 				// calcula el resultado y el metodo almacenara el resultado en la variable firstNum
 				calc();
-				// Muestra en la pantalla el resultado
-				window.screen.setText(Double.toString(window.firstNum));
 			}
 			// Una vez realizada la operacion asigna el valor del operador para la siguiente operacion
 			switch(symbol) {
 				case "÷": window.operator = 1;
 					break;
-				case "X": window.operator = 2;
+				case "x": window.operator = 2;
 					break;
 				case "-": window.operator = 3;
 					break;
