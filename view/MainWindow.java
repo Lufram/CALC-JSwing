@@ -25,7 +25,7 @@ public class MainWindow extends JFrame {
 	
 	// Simbolos para los botones
 	private String[] symbols = {
-			"AC", "+/-", "%", "Ã·",
+			"AC", "+/-", "%", "÷",
 			"7","8","9","x",
 			"4","5","6","-",
 			"1","2","3","+",
@@ -56,7 +56,7 @@ public class MainWindow extends JFrame {
 	
 	// Constructor
 	public MainWindow() {
-		// TamaÃ±o de la ventana
+		// Tamaño de la ventana
 		setSize(300,500);
 		// Localizaon de la ventana
 		setLocationRelativeTo(null);
@@ -97,7 +97,7 @@ public class MainWindow extends JFrame {
 			btns[i].setOpaque(true);
 			
 			btns[i].setFont(new Font("Roboto", Font.ROMAN_BASELINE, 25));
-			// AÃ±ade un listener al boton
+			// Añade un listener al boton
 			btns[i].addActionListener(new EventManager(this));
 			
 			btns[i].setBackground(Color.decode("#e47608"));
@@ -119,7 +119,7 @@ public class MainWindow extends JFrame {
 				// Contenido en blanco
 				btns[i].setForeground(Color.WHITE);
 				
-			}else if (symbols[i] == "Ã·" | symbols[i] == "x" | symbols[i] == "-" | symbols[i] == "+" | symbols[i] == "=" ) {
+			}else if (symbols[i] == "÷" | symbols[i] == "x" | symbols[i] == "-" | symbols[i] == "+" | symbols[i] == "=" ) {
 				
 				btns[i].setBackground(Color.decode("#e47608"));
 				// Contenido en blanco
@@ -130,7 +130,7 @@ public class MainWindow extends JFrame {
 				btns[i].setForeground(Color.BLACK);
 			}
 			btns[i].setFont(new Font("Roboto", Font.ROMAN_BASELINE, 25));
-			// AÃ±ade un listener al boton
+			// Añade un listener al boton
 			btns[i].addActionListener(new EventManager(this));
 			
 			// Propiedades comunes	
@@ -153,7 +153,7 @@ public class MainWindow extends JFrame {
 			if (colCont > 3) { colCont = 0; lineCont++;}
 			
 			
-			// AÃ±ade el boton al panel
+			// Añade el boton al panel
 			btnPanel.add(btns[i],c);
 		
 		}
