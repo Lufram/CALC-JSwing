@@ -3,6 +3,8 @@ package controler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import view.MainWindow;
 
 public class EventManager implements ActionListener{
@@ -18,6 +20,7 @@ public class EventManager implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+		Boolean condicionBucle = true;
 		// Almacena en un string el boton pulsado
 		String cmd = e.getActionCommand().toString();
 		// En funcion del valor del boton pulsado
@@ -28,8 +31,11 @@ public class EventManager implements ActionListener{
 					addSymbol(".");
 				}
 				break;
-
-			case "0": addSymbol("0");
+  
+			case "0": 
+				if (window.screen.getText().toString() != "0"){
+					addSymbol("0");
+				}
 				break;
 
 			case "1": addSymbol("1");
@@ -72,10 +78,28 @@ public class EventManager implements ActionListener{
 				break;
 			
 			case "%":
-				// Falta por revisar
-				double num = Double.parseDouble(window.screen.getText().toString());
+				try {
+					do {
+					String input = JOptionPane.showInputDialog(window, "contrase�a", "Acceso", JOptionPane.QUESTION_MESSAGE);
+					if(input.equals("contrase�a123")){
+						JOptionPane.showMessageDialog(window, "contrase�a correcta", "Acceso permitido", JOptionPane.PLAIN_MESSAGE);
+						condicionBucle = false;
+						if(!window.screen.getText().isEmpty()) {
+						double numero = Double.parseDouble(window.screen.getText().toString());
+						double resultado = Math.cbrt(numero);
+						window.screen.setText(Double.toString(resultado));
+						window.condicion = "operado";
+						}
+					}else {
+						JOptionPane.showMessageDialog(window, "Contrase�a incorrecta\nVuelve a intentarlo", "Acceso denegado", JOptionPane.PLAIN_MESSAGE);
+					}
+				}while(condicionBucle);
+				} catch (NullPointerException e2) {
+					
+				}
 				
 			case "+/-":
+				JOptionPane.showMessageDialog(window,"funcionalidad no disponible", "RaizCuadrada", JOptionPane.INFORMATION_MESSAGE);
 				break;
 			// Reinicia los valores de las variables	
 			case "AC":
@@ -83,6 +107,7 @@ public class EventManager implements ActionListener{
 				window.firstNum = 0;
 				window.secondNum = 0;
 				window.operator = 0;
+				window.condicion = "vacio";
 				break;
 				
 			// Calcula el resultado 
@@ -115,6 +140,7 @@ public class EventManager implements ActionListener{
 				case "4": window.firstNum = window.firstNum + window.secondNum;
 					break;
 			}
+			window.condicion = "operado";
 			// Reiniciamos las variables
 			window.secondNum = 0;
 			window.operator = 0;
@@ -126,8 +152,19 @@ public class EventManager implements ActionListener{
 	
 	// Añade numeros al texto
 	public void addSymbol(String symbol) {
-		// Añadimos el numero 
-		window.screen.setText(window.screen.getText() + symbol);
+		// Si ya hemos realizado una operacion previa
+		if (window.condicion.equals("operado")) {
+			// Reiniciamos la pantalla
+			window.screen.setText("");
+		}
+		// Añadimos el numero
+		if (window.screen.getText().toString() == "0") {
+			window.screen.setText(symbol);
+		} else {
+			window.screen.setText(window.screen.getText() + symbol);
+		}
+		
+		
 	}
 	
 	// Añade un operador si ya hay un operador calcula el resultado y añade el operador despues
